@@ -1,6 +1,6 @@
 {
   "name": "job-hunt-kit",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A job-search folder that organizes itself: a living profile.json, tailored resumes and cover letters filed by date, PDF rendering with page-count checks, and an application tracker.",
   "author": { "name": "Nick Sevostiyanov", "url": "https://github.com/NickSevostiyanov" },
   "license": "MIT",

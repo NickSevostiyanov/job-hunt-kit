@@ -81,6 +81,7 @@ Just talk to it. Each request below triggers one of the skills:
 | "set up my job folder" | `job-setup` | Creates the layout, adopts your existing folders, imports what you have |
 | "here's my resume" / a file / a folder / a LinkedIn URL | `job-import` | Reads any format, files it by date, adds new facts to your profile |
 | "I got AWS certified last week" / "that date is wrong" | `job-profile` | Updates the profile, logs the change, asks about conflicts |
+| "grade my resume" / "how does it score for this job?" | `resume-review` | Scores it out of 100 on a fixed rubric, with evidence for every deduction and the top 5 fixes as exact before/after text |
 | "tailor my resume to this posting" + the posting | `resume` | New dated version that leads with your real matches, ATS-safe, page-checked |
 | "/cover-letter Acme Support Engineer" + the posting | `cover-letter` | One page, every claim traced to your profile, rendered and checked |
 | paste a rejection email / "what's my status?" | `job-tracker` | Updates the right row, flags applications that need a follow-up |
