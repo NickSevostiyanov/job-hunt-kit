@@ -7,7 +7,7 @@ job-hunt-kit is a set of [Claude Code](https://claude.com/claude-code) skills fo
 - build a **living profile** of your experience, where every achievement keeps its proof,
 - **sort every resume and cover letter into dated folders**, so the newest is always the current one,
 - write **tailored resumes and one-page cover letters** using only facts you've confirmed,
-- render **PDFs and check them** for page overflow, broken characters and leftover placeholders,
+- render **PDFs and check what an ATS will see**: a real text layer, your contact details on the page, the page limit, no broken characters or leftover placeholders,
 - keep an **application tracker** that updates when you paste a rejection or interview email.
 
 It works with the folders you already have and whatever date style you already use.

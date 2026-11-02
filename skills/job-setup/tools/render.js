@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 // Renders HTML to PDF with the Chrome, Edge or Chromium already on the machine
 // (no npm packages), writes it to pdf/ next to the HTML, prints the page count,
-// and warns about broken characters or unfilled {{placeholders}}. The page limit
-// comes from --max-pages, else profile.json settings for resumes/cover letters.
-// Exits 1 on any problem.
+// and checks what an ATS will see: a real text layer, your contact details on
+// the page, no broken characters, no unfilled {{placeholders}}. The page limit
+// comes from --max-pages, else profile.json settings. Exits 1 on any problem.
 // Usage: node render.js <file.html> [more.html ...] [--max-pages N]
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { pathToFileURL } = require('url');
 const { execFileSync } = require('child_process');
-const { countPages } = require('./pages');
+const { countPages, pdfContent } = require('./pages');
 const kit = require('./jobkit');
 
 function findBrowser() {
@@ -46,16 +46,17 @@ for (let i = 0; i < args.length; i++) {
 }
 if (!files.length) { console.error('Usage: node render.js <file.html> [...] [--max-pages N]'); process.exit(2); }
 
-// Page limit from settings when the file sits under the resumes or cover-letter folder.
-function limitFor(src) {
-  if (maxPages) return maxPages;
+// Page limit and contact details from profile.json, for files under the
+// resumes or cover-letter folder.
+function contextFor(src) {
   const root = kit.findRoot(path.dirname(src));
-  if (!root) return null;
-  const profile = kit.loadProfile(root);
+  const profile = root ? kit.loadProfile(root) : {};
   const s = profile.settings || {};
-  if (src.startsWith(kit.kindDir(root, 'resumes', profile) + path.sep)) return s.resume_max_pages || 2;
-  if (src.startsWith(kit.kindDir(root, 'coverletters', profile) + path.sep)) return s.coverletter_max_pages || 1;
-  return null;
+  const inKind = k => root && src.startsWith(kit.kindDir(root, k, profile) + path.sep);
+  const limit = maxPages || (inKind('resumes') ? s.resume_max_pages || 2 : inKind('coverletters') ? s.coverletter_max_pages || 1 : null);
+  const id = profile.identity || {};
+  const contact = inKind('resumes') || inKind('coverletters') ? [id.email, id.phone].filter(Boolean) : [];
+  return { limit, contact };
 }
 
 const browser = findBrowser();
@@ -81,13 +82,20 @@ for (const f of files) {
   if (!fs.existsSync(out)) { console.error(`FAILED  ${src} (no PDF produced)`); failed = true; continue; }
 
   const pages = countPages(out);
-  const limit = limitFor(src);
+  const { limit, contact } = contextFor(src);
   const over = limit && pages > limit;
-  const garbled = /�|â€|Ã[\u0080-¿]/.test(html);
+  const garbled = /�|â€|Ã[-¿]/.test(html);
   const placeholders = html.match(/\{\{[^}]+\}\}/g);
+  // ATS parsers read the PDF's text layer: Chrome writes a ToUnicode map for
+  // every real-text font, so a PDF without one is effectively an image.
+  const unreadable = !/\/ToUnicode/.test(pdfContent(out));
+  const visible = html.replace(/<(script|style)[\s\S]*?<\/>|<!--[\s\S]*?-->/gi, '').replace(/<[^>]+>/g, ' ');
+  const missing = contact.filter(c => !visible.includes(c));
   console.log(`${over ? 'OVER  ' : 'OK    '} ${pages} page(s)${limit ? ` (max ${limit})` : ''}  ${out}`);
   if (garbled) console.log('        WARNING: broken characters in the HTML (U+FFFD or mojibake). Re-save as UTF-8.');
   if (placeholders) console.log(`        WARNING: unfilled placeholders: ${[...new Set(placeholders)].join(', ')}`);
-  if (over || garbled || placeholders) failed = true;
+  if (unreadable) console.log('        WARNING: the PDF has no text layer, so an ATS will read nothing. Use real text, not images.');
+  if (missing.length) console.log(`        WARNING: contact details from profile.json not on the page: ${missing.join(', ')}`);
+  if (over || garbled || placeholders || unreadable || missing.length) failed = true;
 }
 process.exit(failed ? 1 : 0);

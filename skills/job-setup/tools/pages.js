@@ -6,7 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const zlib = require('zlib');
 
-function countPages(file) {
+// The PDF's raw bytes plus every inflated stream, as latin1 text.
+function pdfContent(file) {
   const buf = fs.readFileSync(file);
   const text = buf.toString('latin1');
   let extra = '';
@@ -18,7 +19,11 @@ function countPages(file) {
     if (end === -1) continue;
     try { extra += zlib.inflateSync(buf.subarray(start, end)).toString('latin1'); } catch { /* not flate */ }
   }
-  return ((text + extra).match(/\/Type\s*\/Page(?![sA-Za-z])/g) || []).length;
+  return text + extra;
+}
+
+function countPages(file) {
+  return (pdfContent(file).match(/\/Type\s*\/Page(?![sA-Za-z])/g) || []).length;
 }
 
 function pdfsIn(target) {
@@ -30,7 +35,7 @@ function pdfsIn(target) {
   });
 }
 
-module.exports = { countPages };
+module.exports = { countPages, pdfContent };
 
 if (require.main === module) {
   const targets = process.argv.slice(2);

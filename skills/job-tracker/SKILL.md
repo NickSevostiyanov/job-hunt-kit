@@ -18,7 +18,8 @@ description: Log and update job applications in tracker.md (applied, rejected, i
 
 Start from `node ../job-setup/tools/dates.js status` (path relative to this skill's folder), then list:
 - Interviews and deadlines coming up.
-- `Applied` rows with no response after 14 days: suggest a follow-up. After 30 days, suggest marking them `No response`.
+- `Applied` rows with no response after 10 days: offer a short follow-up draft (role, date applied, one relevant line). At most two follow-ups per application, at least a week apart. Only drafts: the user sends them. Note each one in `Notes`.
+- After 30 days with no response, suggest marking the row `No response`.
 - Companies with several open applications.
 
 Keep the summary to a few lines plus that list.
