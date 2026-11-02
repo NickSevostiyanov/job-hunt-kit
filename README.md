@@ -35,42 +35,38 @@ set up my job folder
 
 ## What the first run looks like
 
-Say your folder is the usual mess:
+**Before:** the usual mess. Files named three different ways, nothing dated, no idea which resume is current.
 
-```
-Job Stuff/
-  Resume FINAL v3.docx
-  resume_2026_10_30.pdf
-  Cover Letters/
-    coverletter_acme_8-5-2026.pdf
-    Letter to Globex Nov 2 2026.pdf
-```
+![A messy job folder in File Explorer: loose resumes and a Cover Letters folder](docs/images/before.png)
 
-You run `set up my job folder` and answer one question: *"What do you have?"* You might answer *"everything in here, plus linkedin.com/in/your-name"*. Claude shows its plan before moving anything:
+You say **"set up my job folder"**, and when it asks what you have, answer *"everything in here, plus my LinkedIn"*. Claude shows the plan before it moves anything:
 
-```
-Resume FINAL v3.docx              -> resumes/2026-10-12/Resume FINAL v3.docx   (file date)
-resume_2026_10_30.pdf             -> resumes/2026-10-30/pdf/resume_2026_10_30.pdf
-coverletter_acme_8-5-2026.pdf     -> Cover Letters/2026-08-05/pdf/...          (8-5: Aug 5 or May 8? asks you)
-Letter to Globex Nov 2 2026.pdf   -> Cover Letters/2026-11-02/pdf/...
+```text
+Resume FINAL v3.docx             ->  resumes/2026-10-12/              (date from the file)
+resume_2026_10_30.pdf            ->  resumes/2026-10-30/pdf/
+coverletter_acme_8-5-2026.pdf    ->  Cover Letters/2026-08-05/pdf/    (8-5 = Aug 5 or May 8? it asks)
+Letter to Globex Nov 2 2026.pdf  ->  Cover Letters/2026-11-02/pdf/
 ```
 
-Your `Cover Letters` folder keeps its name. If your folders already use `11-2-2026` style dates, new ones do too. Then it reads everything and fills in `profile.json`:
+**After:** every document is in a dated folder, with PDFs in their own `pdf/` folder and the profile and tracker at the top.
 
-```
+![The same folder after setup: dated resume and cover-letter folders, profile.json and tracker.md](docs/images/after.png)
+
+Your `Cover Letters` folder kept its name. If your folders had used `11-2-2026` style dates, new ones would too. Then it reads everything into `profile.json` and reports back:
+
+```text
 Added 3 roles, 2 projects, 1 credential, 14 skills (9 shipped, 3 familiar, 2 coursework).
 LinkedIn: 2 things on your resume are missing from LinkedIn, worth adding there.
-1 open question: your resume says "Jan 2025 - Present" at Acme, LinkedIn says it ended Aug 2025. Which is right?
+1 question: your resume says Acme "Jan 2025 - Present", LinkedIn says it ended Aug 2025. Which is right?
 ```
 
-From then on, every session in that folder starts with a live status:
+From then on, Claude starts every session in that folder knowing what's current:
 
-```
-job-hunt-kit status (live, use this as current):
+```text
 Profile updated 2026-11-02 (0 days ago).
 Newest resume: resumes/2026-10-30/ (resume_2026_10_30.pdf)
 Newest cover letter: Cover Letters/2026-11-02/ (Letter to Globex Nov 2 2026.pdf)
-Applications: 12 (7 Applied, 2 Interview, 3 Rejected).
+1 open question in profile.json waiting for the user.
 New folders use YYYY-MM-DD, dated with today's date: 2026-11-02.
 ```
 

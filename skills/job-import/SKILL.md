@@ -19,7 +19,7 @@ description: Take anything job-related the user throws in (a resume or cover let
 | LinkedIn data export (ZIP or CSVs) | `Positions.csv`, `Education.csv`, `Skills.csv`, `Profile.csv`, `Projects.csv`, `Certifications.csv` |
 | Pasted text or notes | as given |
 
-Save a copy of every raw input in `sources/` (except job postings, which go to `postings/<company>-<role>-<YYYY-MM-DD>.md`).
+Where originals go: resumes and cover letters are filed into dated folders (step 3), job postings go to `postings/<company>-<role>-<YYYY-MM-DD>.md`, and everything else (LinkedIn PDFs and exports, transcripts, notes) is kept in `sources/` with the date in the name.
 
 ## 2. Decide what it is
 
