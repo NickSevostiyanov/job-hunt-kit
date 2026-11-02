@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Resume - {{NAME}}</title>
+<!--
+  ATS-friendly single column: real text, standard section names, no tables,
+  icons or columns. Each .entry stays on one page; a section heading never
+  sits alone at the bottom of a page.
+-->
+<style>
+  @page { size: Letter; margin: 0.5in 0.6in; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.4; color: #000; background: #fff; }
+  h1 { font-size: 20pt; margin-bottom: 2px; }
+  .headline { font-size: 11pt; margin-bottom: 3px; }
+  .contact { font-size: 9.5pt; margin-bottom: 10px; }
+  h2 { font-size: 11pt; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1.2px solid #000;
+       padding-bottom: 2px; margin: 12px 0 6px; break-after: avoid; }
+  .entry { margin-bottom: 8px; break-inside: avoid; }
+  .row { display: flex; justify-content: space-between; gap: 12px; }
+  .title { font-weight: bold; }
+  .meta { white-space: nowrap; }
+  .sub { font-style: italic; }
+  ul { margin: 3px 0 0 16px; }
+  li { margin-bottom: 2px; }
+  .skills p { margin-bottom: 3px; }
+  .skills b { display: inline-block; min-width: 9.5em; }
+</style>
+</head>
+<body>
+  <h1>{{NAME}}</h1>
+  <div class="headline">{{HEADLINE}}</div>
+  <div class="contact">{{LOCATION}} | {{PHONE}} | {{EMAIL}} | {{LINKS}}</div>
+
+  <h2>Summary</h2>
+  <p>{{SUMMARY}}</p>
+
+  <h2>Skills</h2>
+  <div class="skills">
+    <!-- Labelled rows. Only skills in profile.json skills.shipped / skills.familiar; coursework on its own row. -->
+    <p><b>{{SKILL_LABEL_1}}:</b> {{SKILL_ROW_1}}</p>
+    <p><b>{{SKILL_LABEL_2}}:</b> {{SKILL_ROW_2}}</p>
+  </div>
+
+  <h2>Experience</h2>
+  <!-- One .entry per role, newest first. Copy this block. -->
+  <div class="entry">
+    <div class="row"><span class="title">{{TITLE}}, {{ORG}}</span><span class="meta">{{START}} - {{END}}</span></div>
+    <div class="row sub"><span>{{ORG_LOCATION}}</span><span>{{ARRANGEMENT}}</span></div>
+    <ul>
+      <li>{{HIGHLIGHT}}</li>
+    </ul>
+  </div>
+
+  <h2>Projects</h2>
+  <div class="entry">
+    <div class="row"><span class="title">{{PROJECT}}</span><span class="meta">{{PROJECT_DATES}}</span></div>
+    <ul>
+      <li>{{PROJECT_HIGHLIGHT}}</li>
+    </ul>
+  </div>
+
+  <h2>Education</h2>
+  <div class="entry">
+    <div class="row"><span class="title">{{CREDENTIAL}}, {{SCHOOL}}</span><span class="meta">{{EDU_END}}</span></div>
+  </div>
+</body>
+</html>

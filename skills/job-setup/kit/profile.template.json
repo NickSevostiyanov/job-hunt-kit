@@ -1,0 +1,39 @@
+{
+  "jobkit_version": 1,
+  "updated": "",
+  "settings": {
+    "folders": { "resumes": null, "coverletters": null },
+    "date_format": null,
+    "best_resume": null,
+    "paper": "Letter",
+    "resume_max_pages": 2,
+    "coverletter_max_pages": 1,
+    "profile_stale_days": 30
+  },
+  "identity": {
+    "name": "",
+    "headline": "",
+    "location": "",
+    "email": "",
+    "phone": "",
+    "links": { "linkedin": "", "github": "", "website": "" },
+    "work_authorization": "",
+    "availability": ""
+  },
+  "targets": {
+    "roles": [],
+    "locations": [],
+    "arrangements": [],
+    "salary": { "currency": "", "minimum": null, "target": null }
+  },
+  "experience": [],
+  "projects": [],
+  "education": [],
+  "skills": { "shipped": [], "familiar": [], "coursework": [] },
+  "do_not_claim": [],
+  "rules": [],
+  "no_ai_employers": [],
+  "open_questions": [],
+  "sources": [],
+  "changelog": []
+}

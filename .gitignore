@@ -1,0 +1,12 @@
+# Never commit a real job search. These are what job-setup creates in a job folder.
+/profile.json
+/tracker.md
+/resumes/
+/coverletters/
+/postings/
+/sources/
+/templates/
+*.pdf
+node_modules/
+.DS_Store
+Thumbs.db

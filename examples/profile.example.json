@@ -1,0 +1,91 @@
+{
+  "jobkit_version": 1,
+  "updated": "2026-11-02",
+  "settings": {
+    "folders": { "resumes": "resumes", "coverletters": "coverletters" },
+    "date_format": "YYYY-MM-DD",
+    "best_resume": null,
+    "paper": "Letter",
+    "resume_max_pages": 2,
+    "coverletter_max_pages": 1,
+    "profile_stale_days": 30
+  },
+  "identity": {
+    "name": "Alex Rivera",
+    "headline": "Junior Software Developer",
+    "location": "Portland, OR",
+    "email": "alex.rivera@example.com",
+    "phone": "555-0142",
+    "links": { "linkedin": "linkedin.com/in/example", "github": "github.com/example", "website": "" },
+    "work_authorization": "US citizen, no sponsorship needed",
+    "availability": "Immediately"
+  },
+  "targets": {
+    "roles": ["Junior Software Developer", "Technical Support Engineer"],
+    "locations": ["Portland, OR", "Remote (US)"],
+    "arrangements": ["Hybrid", "Remote"],
+    "salary": { "currency": "USD", "minimum": 65000, "target": 78000 }
+  },
+  "experience": [
+    {
+      "id": "acme-support",
+      "title": "IT Support Technician",
+      "org": "Acme Logistics",
+      "location": "Portland, OR",
+      "arrangement": "On-site",
+      "start": "2024-06",
+      "end": "2025-08",
+      "summary": "First-line support for a 120-person warehouse office.",
+      "highlights": [
+        {
+          "text": "Wrote a PowerShell onboarding script that cut new-laptop setup from about two hours to 25 minutes.",
+          "evidence": "Script in team repo; timing from the IT lead's onboarding checklist",
+          "source": "chat",
+          "as_of": "2026-10-30"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "shift-planner",
+      "name": "Shift Planner",
+      "dates": "2025-09 - 2026-01",
+      "link": "github.com/example/shift-planner",
+      "stack": ["Python", "Flask", "PostgreSQL"],
+      "highlights": [
+        {
+          "text": "Scheduling web app with 64 automated tests, used by one volunteer group to plan weekly shifts.",
+          "evidence": "Test count from the CI run; the group's coordinator confirmed use",
+          "source": "resume-2026-01",
+          "as_of": "2026-01-15"
+        }
+      ]
+    }
+  ],
+  "education": [
+    { "credential": "Associate of Applied Science, Computer Information Systems", "school": "Example Community College", "end": "2024-05", "notes": "" }
+  ],
+  "skills": {
+    "shipped": ["Python", "PowerShell", "SQL", "Flask", "Git"],
+    "familiar": ["Docker", "Linux administration"],
+    "coursework": ["Networking fundamentals", "Java"]
+  },
+  "do_not_claim": [
+    { "item": "Kubernetes", "reason": "Followed tutorials only, never ran it for real" }
+  ],
+  "rules": [
+    "Title at Acme is 'IT Support Technician', never 'Systems Administrator'."
+  ],
+  "no_ai_employers": [],
+  "open_questions": [
+    { "question": "Shift Planner: is the volunteer group still using it, or past tense?", "raised": "2026-11-02" }
+  ],
+  "sources": [
+    { "type": "linkedin-pdf", "path": "sources/linkedin-2026-10-30.pdf", "as_of": "2026-10-30" },
+    { "type": "resume", "path": "sources/resume-2026-01.pdf", "as_of": "2026-01-15" }
+  ],
+  "changelog": [
+    { "date": "2026-10-30", "change": "Imported LinkedIn PDF export; added Acme onboarding-script highlight", "source": "linkedin-pdf" }
+  ]
+}
